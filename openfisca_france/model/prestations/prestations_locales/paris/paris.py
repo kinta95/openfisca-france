@@ -203,15 +203,3 @@ class charges_forfaitaire_logement(Variable):
             (couple * (nb_enfants >= 1)), (personne_isol * (nb_enfants >= 1))],
             [charges_forf_pers_isol, charges_forf_coloc, charges_forf_couple_ss_enf, charges_forf_couple_enf, 0])
         return period, result
-
-class montant_aide_logement(Variable):
-    column = FloatCol
-    label = u"Montant des aides logement APL ou ALS ou ALF"
-    entity_class = Familles
-
-    def function(self, simulation, period):
-        apl = simulation.calculate('apl', period)
-        als = simulation.calculate('als', period)
-        alf = simulation.calculate('alf', period)
-
-        return period, (apl + als + alf)
